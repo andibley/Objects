@@ -65,7 +65,9 @@ public class BasicGameApp implements Runnable {
       //create (construct) the objects needed for the game and load up 
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
 		astro = new Astronaut(10,100);
-		Jack = new Astronaut(30,50);
+		Jack = new Astronaut(50,200);
+		Jack.dx=0;
+		Jack.dy=8;
 
 
 	}// BasicGameApp()
@@ -83,19 +85,18 @@ public class BasicGameApp implements Runnable {
       //for the moment we will loop things forever.
 		while (true) {
 
-         moveThings();  //move all the game objects
+			moveThings();
+		//move all the game objects
          render();  // paint the graphics
          pause(20); // sleep for 10 ms
 		}
 	}
 
-
 	public void moveThings()
 	{
       //calls the move( ) code in the objects
-		astro.move();
-		Jack.move();
-
+		astro.bounce();
+		Jack.bounce();
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
