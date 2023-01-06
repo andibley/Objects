@@ -39,11 +39,14 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 	public Image astroPic;
+	public Image emojiPic;
+	public Image background;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
 	private Astronaut Jack;
+	private Astronaut emoji;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -63,11 +66,17 @@ public class BasicGameApp implements Runnable {
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
+		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png");
+		emojiPic = Toolkit.getDefaultToolkit().getImage("emojipic.png");//load the picture
 		astro = new Astronaut(10,100);
 		Jack = new Astronaut(50,200);
 		Jack.dx=0;
 		Jack.dy=8;
+		emoji = new Astronaut(10,100);
+		//emoji = new Astronaut(50,200);
+	background = Toolkit.getDefaultToolkit().getImage("moon.jpeg"); //load the picture
+		emoji.dx=0;
+		emoji.dy=8;
 
 
 	}// BasicGameApp()
@@ -97,6 +106,7 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 		astro.bounce();
 		Jack.bounce();
+		emoji.bounce();
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -146,10 +156,15 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
+		g.drawImage(background, 0,0, WIDTH, HEIGHT, null);
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
 		g.drawImage(astroPic, Jack.xpos, Jack.ypos, Jack.width, Jack.height, null);
 
+		//g.drawImage(background, 1,1, WIDTH, HEIGHT, null);
+		g.drawImage(emojiPic, emoji.xpos, emoji.ypos, emoji.width, emoji.height, null);
 
+	g.draw(new Rectangle(astro.xpos,astro.ypos,astro.height,astro.width));
+	g.draw(new Rectangle(Jack.xpos,Jack.ypos,Jack.height,Jack.width));
 		g.dispose();
 
 		bufferStrategy.show();
