@@ -19,6 +19,7 @@ public class Astronaut {
     public Rectangle rec;
 
 
+
     // METHOD DEFINITION SECTION
 
     // Constructor Definition

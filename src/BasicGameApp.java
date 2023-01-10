@@ -24,12 +24,28 @@ import javax.swing.JPanel;
 
 public class BasicGameApp implements Runnable {
 
-	public void crash(){
+	public void crash() {
 
-		If(Jack.rec.intersects(astro.rec));
+		if(Jack.rec.intersects(astro.rec)){
 
-			System.out.println("crash");
+		System.out.println("crash");
+		astro.dx = -1 * astro.dx;
+		astro.dy = -astro.dy;
+		Jack.dx = -1 * astro.dx;
+		Jack.dy = -Jack.dy;
+
+		if(emoji.rec.intersects(astro.rec)) {
+			emoji.dx = -1*emoji.dx;
+			emoji.dy = -emoji.dy;
+			astro.dx = -1 * astro.dx;
+			astro.dy = -astro.dy;
+			Jack.dx = -1 * astro.dx;
+			Jack.dy = -Jack.dy;
+
 		}
+		}
+	}
+
 
 
 
@@ -112,7 +128,7 @@ public class BasicGameApp implements Runnable {
 		//move all the game objects
          render();  // paint the graphics
          pause(20); // sleep for 10 ms
-			crash();
+
 		}
 	}
 
@@ -122,7 +138,7 @@ public class BasicGameApp implements Runnable {
 		astro.bounce();
 		Jack.bounce();
 		emoji.bounce();
-
+		crash();
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
