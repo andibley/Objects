@@ -25,25 +25,26 @@ import javax.swing.JPanel;
 public class BasicGameApp implements Runnable {
 
 	public void crash() {
-
-		if(Jack.rec.intersects(astro.rec)){
+		System.out.println(Jack.xpos + "y:" + Jack.ypos);
+		if(Jack.rec.intersects(astro.rec) && Jack.isAlive == true && astro.isAlive == true){
 
 		System.out.println("crash");
 		astro.dx = -1 * astro.dx;
 		astro.dy = -astro.dy;
 		Jack.dx = -1 * astro.dx;
 		Jack.dy = -Jack.dy;
+		Jack.isAlive = false;
+		}
 
 		if(emoji.rec.intersects(astro.rec)) {
 			emoji.dx = -1*emoji.dx;
 			emoji.dy = -emoji.dy;
 			astro.dx = -1 * astro.dx;
 			astro.dy = -astro.dy;
-			Jack.dx = -1 * astro.dx;
-			Jack.dy = -Jack.dy;
+
 
 		}
-		}
+
 	}
 
 
@@ -99,10 +100,10 @@ public class BasicGameApp implements Runnable {
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png");
 		emojiPic = Toolkit.getDefaultToolkit().getImage("emojipic.png");//load the picture
 		astro = new Astronaut(10,100);
-		Jack = new Astronaut(50,200);
+		Jack = new Astronaut(100,200);
 		Jack.dx=1;
 		Jack.dy=8;
-		emoji = new Astronaut(10,100);
+		emoji = new Astronaut(200,100);
 		//emoji = new Astronaut(50,200);
 	background = Toolkit.getDefaultToolkit().getImage("moon.jpeg"); //load the picture
 		emoji.dx=2;
@@ -190,13 +191,16 @@ public class BasicGameApp implements Runnable {
 		//draw the image of the astronaut
 		g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
-		g.drawImage(astroPic, Jack.xpos, Jack.ypos, Jack.width, Jack.height, null);
+		if(Jack.isAlive == true){
+			g.drawImage(astroPic, Jack.xpos, Jack.ypos, Jack.width, Jack.height, null);
+			g.draw(new Rectangle(Jack.xpos, Jack.ypos, Jack.width, Jack.height));
+
+		}
 
 		//g.drawImage(background, 1,1, WIDTH, HEIGHT, null);
 		g.drawImage(emojiPic, emoji.xpos, emoji.ypos, emoji.width, emoji.height, null);
 
 		g.draw(new Rectangle(astro.xpos, astro.ypos, astro.height, astro.width));
-		g.draw(new Rectangle(Jack.xpos, Jack.ypos, Jack.height, Jack.width));
 		g.dispose();
 
 		bufferStrategy.show();
@@ -205,4 +209,5 @@ public class BasicGameApp implements Runnable {
 
 	}
 
+	//isalive use for game
 

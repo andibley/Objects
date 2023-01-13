@@ -73,7 +73,7 @@ public class Astronaut {
             ypos = ypos + dy;
         rec = new Rectangle(xpos,ypos,height,width);
     }
-    }
+}
 
 
 
